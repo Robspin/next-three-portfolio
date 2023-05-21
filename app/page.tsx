@@ -6,6 +6,7 @@ import { Suspense } from 'react'
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
 const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
+const Mac = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Mac), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -75,6 +76,19 @@ export default function Page() {
             have multiple views with a single, performant canvas. These views will follow their tracking elements,
             scroll along, resize, etc.
           </p>
+        </div>
+        {/* third row */}
+        <div className='relative h-48 w-full py-6 sm:w-1/2 md:my-12 md:mb-40'>
+          <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Events are propagated</h2>
+          <p className='mb-8 text-gray-600'>Drag, scroll, pinch, and rotate the canvas to explore the 3D scene.</p>
+        </div>
+        <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
+          <View orbit className='relative h-full  sm:h-48 sm:w-full'>
+            <Suspense fallback={null}>
+              <Mac scale={1} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
+              <Common color={'lightgreen'} />
+            </Suspense>
+          </View>
         </div>
       </div>
     </>
