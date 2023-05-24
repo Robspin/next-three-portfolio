@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
 import { ReactNode } from 'react'
 import { Inter } from "next/font/google"
+import {Layout} from "@/components/dom/Layout"
 
 const inter = Inter({subsets: ['latin']});
 
@@ -32,10 +33,10 @@ export default async function LocaleLayout({ children, params: {locale} }: Props
     }
 
     return (
-        <html className="h-full" lang={locale}>
+        <html className="h-full antialiased" lang={locale}>
             <body className={`${inter.className} flex h-full flex-col `}>
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    {children}
+                    <Layout>{children}</Layout>
                 </NextIntlClientProvider>
             </body>
         </html>

@@ -12,10 +12,9 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 
 export function Heart(props) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF('/heart.glb')
-  const { actions } = useAnimations(animations, group)
-
-  console.log(animations[0])
+  // @ts-ignore
+  const { nodes, animations } = useGLTF('/heart.glb')
+  // const { actions } = useAnimations(animations, group)
 
   return (
     <group ref={group} {...props} dispose={null}>

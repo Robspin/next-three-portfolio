@@ -1,0 +1,11 @@
+{
+  "Landing": {
+    "titles": {
+      "frontend": "フロントエンド",
+      "creative": "クリエイティブ",
+      "uxUi": "UX/UI",
+      "developer": "デベロッパー"
+    },
+    "test": "日本"
+  }
+}

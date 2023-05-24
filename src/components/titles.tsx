@@ -1,21 +1,13 @@
 import { useEffect, useState } from "react"
 import { gsap } from "gsap"
 import SplitTextJS from 'split-text-js'
-
-const titles = [
-    { name: 'SOFTWARE',
-        color: 'text-purple-400'
-    },
-    { name: 'CREATIVE',
-        color: 'text-orange-400'
-    },
-    { name: 'UX/UI',
-        color: 'text-blue-400'
-    },
-]
+import { useTranslations } from "next-intl"
 
 const Titles = () => {
     const [show, setShow] = useState(false)
+    const t = useTranslations('Landing.titles')
+
+    const titles = [t('frontend'), t('creative'), t('uxUi')]
 
     useEffect(() => {
         setShow(true)
@@ -48,8 +40,8 @@ const Titles = () => {
 
     return (
         <div>
-            {titles.map((title) => <p key={title.name}
-              className={`leading-[0] ${show ? 'opacity-100' : 'opacity-0'} transition-opacity text-red-500 titleAnimation`}>{title.name} DEVELOPER</p>)}
+            {titles.map((title) => <p key={title}
+              className={`leading-[0] ${show ? 'opacity-100' : 'opacity-0'} transition-opacity text-red-500 titleAnimation`}>{title} {t('developer')}</p>)}
         </div>
     )
 }
