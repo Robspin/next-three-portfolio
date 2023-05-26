@@ -6,6 +6,10 @@
       "uxUi": "UX/UI",
       "developer": "デベロッパー"
     },
-    "test": "日本"
+    "links": {
+      "aboutMe": "私について",
+      "myWork": "私の仕事",
+      "blog": "ブログ"
+    }
   }
 }

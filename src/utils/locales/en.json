@@ -6,6 +6,11 @@
       "uxUi": "UX/UI",
       "developer": "DEVELOPER"
     },
-    "test": "English"
+    "test": "English",
+    "links": {
+      "aboutMe": "ABOUT ME",
+      "myWork": "MY WORK",
+      "blog": "BLOG"
+    }
   }
 }

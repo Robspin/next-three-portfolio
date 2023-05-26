@@ -1,7 +1,8 @@
 "use client"
 import { useState } from 'react'
-import Titles from "@/components/titles"
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
+import Titles from "@/components/titles"
 import LocaleSwitcher from "@/components/locale-switcher"
 import ThemeSwitch from "@/components/theme-switch"
 import Mac from "@/components/canvas/Mac"
@@ -17,7 +18,7 @@ export default function App() {
                 <Mac />
             </div>
             <div className="flex flex-col p-4 absolute w-full h-full pointer-events-none">
-                <div className="flex w-full justify-end pointer-events-auto bg-green-100">
+                <div className="flex w-full justify-end pointer-events-auto">
                     <div className="flex text-sm">
                         <LocaleSwitcher />
                         <span className="mx-2"></span>
@@ -30,10 +31,10 @@ export default function App() {
                         <div className="mt-[2vw] text-[6vw] font-extrabold"><Titles /></div>
                     </div>
                 </div>
-                <ul className="mt-auto font-bold text-xl pointer-events-auto">
-                    <li className="transition hover:translate-x-1"><button>ABOUT ME</button></li>
-                    <li className="transition hover:translate-x-1"><button>MY WORK</button></li>
-                    <li className="transition hover:translate-x-1"><button>BLOG</button></li>
+                <ul className="mt-auto font-bold text-3xl pointer-events-auto">
+                    <li className="transition hover:translate-x-1"><Link href="/about-me">{t('links.aboutMe')}</Link></li>
+                    <li className="transition hover:translate-x-1"><Link href="/my-work">{t('links.myWork')}</Link></li>
+                    <li className="transition hover:translate-x-1"><Link href="https://blog.robinsteeman.com/" target="_blank">{t('links.blog')}</Link></li>
                 </ul>
             </div>
         </div>

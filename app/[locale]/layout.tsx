@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
 import { ReactNode } from 'react'
 import { Inter } from "next/font/google"
-import {Layout} from "@/components/dom/Layout"
+import { Layout } from "@/components/dom/Layout"
 
 const inter = Inter({subsets: ['latin']});
 
@@ -12,22 +12,22 @@ type Props = {
 };
 
 export async function generateMetadata({params: {locale}}: Props) {
-    const messages = (await import(`@/utils/i18n/locales/${locale}.json`)).default
+    // const messages = (await import(`@/utils/locales/${locale}.json`)).default
 
     // You can use the core (non-React) APIs when you have to use next-intl
     // outside of components. Potentially this will be simplified in the future
     // (see https://next-intl-docs.vercel.app/docs/next-13/server-components).
-    const t = createTranslator({ locale, messages })
+    // const t = createTranslator({ locale, messages })
 
     return {
-        title: t('LocaleLayout.title')
+        title: 'test'
     };
 }
 
 export default async function LocaleLayout({ children, params: {locale} }: Props) {
     let messages
     try {
-        messages = (await import(`@/utils/i18n/locales/${locale}.json`)).default
+        messages = (await import(`@/utils/locales/${locale}.json`)).default
     } catch (error) {
         notFound()
     }
