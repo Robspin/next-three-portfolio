@@ -28,9 +28,6 @@ type Props = {
 // }
 
 export default async function LocaleLayout({ children, params: { locale } }: Props) {
-
-    console.log(children)
-
     let messages
     try {
         messages = (await import(`@/utils/locales/${locale}.json`)).default
@@ -55,7 +52,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
 
     return (
         <html className="h-full antialiased" lang={locale}>
-            <body className={`${inter.className} flex h-full flex-col `}>
+            <body className={`${inter.className} flex h-full flex-col`}>
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     {children}
                     {/*<Layout>{children}</Layout>*/}

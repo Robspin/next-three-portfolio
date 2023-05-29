@@ -8,19 +8,18 @@ import ICreate from "@/components/about-me/i-create"
 import Technologies from "@/components/about-me/technologies"
 import MyWork from "@/components/my-work"
 import Contact from "@/components/contact"
+import LocaleSwitcher from "@/components/locale-switcher"
+import ThemeSwitch from "@/components/theme-switch"
 
 export default function ScrollDemo() {
-
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger)
         const container = document.querySelector(".container");
         const sections = gsap.utils.toArray(".container section");
         const texts = gsap.utils.toArray(".anim");
-        const mask = document.querySelector(".mask");
+        // const mask = document.querySelector(".mask");
+        const scrollProgress = document.querySelector(".scroll-progress");
 
-        console.log(container)
-
-        console.log(sections.length)
         const ctx = gsap.context(() => {
             let scrollTween = gsap.to(sections, {
                 xPercent: -100 * (sections.length - 1),
@@ -35,18 +34,15 @@ export default function ScrollDemo() {
                 }
             });
 
-            console.log(1 / (sections.length - 1))
-
-            // Progress bar animation
-
-            // gsap.to(mask, {
-            //     width: "105%",
-            //     scrollTrigger: {
-            //         trigger: ".wrapper",
-            //         start: "top left",
-            //         scrub: 1
-            //     }
-            // });
+            gsap.to(scrollProgress, {
+                width: "100%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".wrapper",
+                    start: "top left",
+                    scrub: 1
+                }
+            });
 
             // whizz around the sections
             sections.forEach((section) => {
@@ -108,6 +104,20 @@ export default function ScrollDemo() {
                         <Contact />
                     </section>
                 </div>
+                <header className="w-screen fixed top-4">
+                    <div className="flex mx-4 justify-end pointer-events-auto">
+                        <div className="flex text-sm">
+                            <LocaleSwitcher />
+                            <span className="mx-2"></span>
+                            <ThemeSwitch handler={() => null} dark={false} />
+                        </div>
+                    </div>
+                </header>
+                <footer className="fixed bottom-2 w-screen">
+                    <div className="mx-4 flex h-[2px] bg-secondary relative">
+                        <div className="w-0 h-[2px] bg-red-500 absolute transition scroll-progress"></div>
+                    </div>
+                </footer>
             </div>
         </div>
     );
