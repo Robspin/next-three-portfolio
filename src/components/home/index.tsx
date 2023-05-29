@@ -7,7 +7,7 @@ import LocaleSwitcher from "@/components/locale-switcher"
 import ThemeSwitch from "@/components/theme-switch"
 import Mac from "@/components/canvas/Mac"
 
-export default function App() {
+export default function index() {
     const [dark, setDark] = useState(false)
     // const { progress } = useProgress()
     const t = useTranslations('Landing')
@@ -31,11 +31,11 @@ export default function App() {
                         <div className="mt-[1vw] text-[4vw] font-extrabold"><Titles /></div>
                     </div>
                 </div>
-                <ul className="mt-auto font-bold text-3xl pointer-events-auto">
-                    <li className="transition hover:translate-x-1"><Link href="/about-me">{t('links.aboutMe')}</Link></li>
-                    <li className="transition hover:translate-x-1"><Link href="/my-work">{t('links.myWork')}</Link></li>
-                    <li className="transition hover:translate-x-1"><Link href="https://blog.robinsteeman.com/" target="_blank">{t('links.blog')}</Link></li>
-                </ul>
+                {/*<ul className="mt-auto font-bold text-3xl pointer-events-auto">*/}
+                {/*    <li className="transition hover:translate-x-1"><Link href="/about-me">{t('links.aboutMe')}</Link></li>*/}
+                {/*    <li className="transition hover:translate-x-1"><Link href="/my-work">{t('links.myWork')}</Link></li>*/}
+                {/*    <li className="transition hover:translate-x-1"><Link href="https://blog.robinsteeman.com/" target="_blank">{t('links.blog')}</Link></li>*/}
+                {/*</ul>*/}
             </div>
         </div>
     )
