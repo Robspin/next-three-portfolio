@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import { usePathname } from 'next-intl/client'
 
-const LocaleSwitcher = () => {
+const LocaleSwitch = () => {
     const locale = useLocale()
     const router = useRouter()
     const pathname = usePathname()
@@ -25,4 +25,4 @@ const LocaleSwitcher = () => {
     return <button onClick={() => changeLocale(displayLocale.locale)} className="cursor-pointer transition-color hover:text-red-500">{displayLocale.name}</button>
 }
 
-export default LocaleSwitcher
+export default LocaleSwitch

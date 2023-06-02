@@ -2,26 +2,28 @@
 
 import { forwardRef, useEffect, useState } from 'react'
 // import * as THREE from "three"
-import { Canvas, useThree } from '@react-three/fiber'
+import {Canvas, useFrame, useThree} from '@react-three/fiber'
 import { useGLTF, useTexture, useHelper } from '@react-three/drei'
 import gsap from 'gsap'
 import useRefs from 'react-use-refs'
 
 
-export default function MacScene() {
+export default function MacScene({ scrollProgress }: { scrollProgress: number }) {
     return (
         <Canvas shadows dpr={[1, 2]} camera={{ position: [0, -3.2, 40], fov: 12 }} linear>
-            <Composition />
+            <Composition scrollProgress={scrollProgress} />
         </Canvas>
     )
 }
 
-function Composition({ ...props }) {
+const Composition = ({ scrollProgress, ...props }: { scrollProgress: number }) => {
     const { width, height } = useThree((state) => state.viewport)
     const [group, mbp16, keyLight, stripLight, fillLight] = useRefs()
     const [vscode1, vscode2] = useTexture(['/vscode1.png', '/vscode2.png'])
     const [currentTexture, setCurrentTexture] = useState(vscode1)
     const [macOpened, setMacOpened] = useState(false)
+
+    const macRotation = -1 * ((scrollProgress * 1.75) + 0.1)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -60,11 +62,13 @@ function Composition({ ...props }) {
     // useHelper(stripLight, THREE.SpotlightHelper, 0.5, "teal")
     // useHelper(keyLight, THREE.DirectionalLightHelper, 0.5, "red")
 
-    const toggleMac = () => macOpened ? closeMac() : openMac()
+    const toggleMac = () => null // macOpened ? closeMac() : openMac()
 
     useEffect(() => {
-        console.log(width)
-    }, [width])
+        console.log('mac:', scrollProgress)
+        if (scrollProgress > 0.10 && scrollProgress < 0.2) closeMac()
+        else if (scrollProgress < 0.10) openMac()
+    }, [scrollProgress])
 
     return (
         <>
@@ -75,7 +79,7 @@ function Composition({ ...props }) {
             <group ref={group} position={[0, -height / 2.65, 0]} {...props}>
                 <spotLight ref={stripLight} position={[width * 3, 0, width]} angle={0.19} penumbra={1} intensity={6} />
                 {/*<spotLight ref={fillLight} position={[0, -width / 2.4, -width * 2.2]} angle={0.2} penumbra={1} intensity={2} distance={width * 3} />*/}
-                <Mac onClick={toggleMac} className="cursor-pointer" ref={mbp16} texture={currentTexture} scale={width / 80} position={[width / 10, 1, 0]} rotation={[0.1, -0.1, 0]} />
+                <Mac onClick={toggleMac} className="cursor-pointer" ref={mbp16} texture={currentTexture} scale={width / 80} position={[(width / 10) + (scrollProgress * 6), 1, 0]} rotation={[0.1, macRotation, 0]} />
             </group>
         </>
     )
