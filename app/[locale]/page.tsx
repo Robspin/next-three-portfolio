@@ -10,6 +10,7 @@ import MyWork from "@/components/my-work"
 import Contact from "@/components/contact"
 import LocaleSwitch from "@/components/locale-switch"
 import ThemeSwitch from "@/components/theme-switch"
+import MusicBars from "@/components/music-bars"
 
 export default function ScrollDemo() {
     const [scrollProgress, setScrollProgress] = useState(0)
@@ -108,7 +109,10 @@ export default function ScrollDemo() {
                     </section>
                 </div>
                 <header className="w-screen fixed top-4">
-                    <div className="flex mx-4 justify-end pointer-events-auto">
+                    <div className="flex mx-4 justify-between items-center pointer-events-auto">
+                        <div className="-mt-2 w-12 h-10">
+                            <MusicBars />
+                        </div>
                         <div className="flex text-sm">
                             <LocaleSwitch />
                             <span className="mx-2"></span>

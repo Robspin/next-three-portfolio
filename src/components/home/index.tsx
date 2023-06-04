@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import Titles from "@/components/titles"
@@ -16,12 +16,15 @@ export default function index({ scrollProgress }: { scrollProgress: number }) {
             <div className='absolute w-full h-full'>
                 <Mac scrollProgress={scrollProgress} />
             </div>
-            <div className="flex flex-col p-4 absolute w-full h-full pointer-events-none">
+            <div className="flex flex-col p-4 absolute w-full h-full pointer-events-none" >
                 <div className="flex flex-col">
                     <div className="mt-[100px]">
                         <div className="text-[4vw] font-bold">Robin Steeman</div>
                         <div className="mt-[1vw] text-[4vw] font-extrabold"><Titles /></div>
                     </div>
+                </div>
+                <div className="mt-auto">
+                    <p className="text-slate-500 italic">102 visits</p>
                 </div>
             </div>
         </div>

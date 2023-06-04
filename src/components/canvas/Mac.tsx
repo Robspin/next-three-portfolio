@@ -1,9 +1,8 @@
 'use client'
 
 import { forwardRef, useEffect, useState } from 'react'
-// import * as THREE from "three"
-import {Canvas, useFrame, useThree} from '@react-three/fiber'
-import { useGLTF, useTexture, useHelper } from '@react-three/drei'
+import {Canvas, useThree} from '@react-three/fiber'
+import { useGLTF, useTexture } from '@react-three/drei'
 import gsap from 'gsap'
 import useRefs from 'react-use-refs'
 
@@ -21,7 +20,7 @@ const Composition = ({ scrollProgress, ...props }: { scrollProgress: number }) =
     const [group, mbp16, keyLight, stripLight, fillLight] = useRefs()
     const [vscode1, vscode2] = useTexture(['/vscode1.png', '/vscode2.png'])
     const [currentTexture, setCurrentTexture] = useState(vscode1)
-    const [macOpened, setMacOpened] = useState(false)
+    const [initialAnimationFinished, setInitialAnimationFinished] = useState(false)
 
     const macRotation = -1 * ((scrollProgress * 1.75) + 0.1)
 
@@ -31,9 +30,9 @@ const Composition = ({ scrollProgress, ...props }: { scrollProgress: number }) =
         }, 500)
 
         return () => clearInterval(interval)
-    }, [])
+    }, [vscode1, vscode2])
 
-    const openMac = (delay = 0) => {
+    const openMac = (delay = 0, onComplete = () => null) => {
         if (!mbp16.current) return
         mbp16.current.rotation.x = Math.PI
         gsap.to(mbp16.current.rotation, {
@@ -41,7 +40,7 @@ const Composition = ({ scrollProgress, ...props }: { scrollProgress: number }) =
             ease: "ease-in",
             duration: 2,
             delay: delay,
-            onComplete: () => setMacOpened(true)
+            onComplete
         })
     }
 
@@ -50,22 +49,20 @@ const Composition = ({ scrollProgress, ...props }: { scrollProgress: number }) =
         gsap.to(mbp16.current.rotation, {
             x: Math.PI,
             ease: "ease-in",
-            duration: 2,
-            onComplete: () => setMacOpened(false)
+            duration: 2
         })
     }
 
     useEffect(() => {
-        openMac(2)
+        if (!mbp16.current) return
+        openMac(2, () => setInitialAnimationFinished(true))
         stripLight.current.target = mbp16.current
     }, [mbp16])
     // useHelper(stripLight, THREE.SpotlightHelper, 0.5, "teal")
     // useHelper(keyLight, THREE.DirectionalLightHelper, 0.5, "red")
 
-    const toggleMac = () => null // macOpened ? closeMac() : openMac()
-
     useEffect(() => {
-        console.log('mac:', scrollProgress)
+        if (!initialAnimationFinished) return
         if (scrollProgress > 0.10 && scrollProgress < 0.2) closeMac()
         else if (scrollProgress < 0.10) openMac()
     }, [scrollProgress])
@@ -79,7 +76,7 @@ const Composition = ({ scrollProgress, ...props }: { scrollProgress: number }) =
             <group ref={group} position={[0, -height / 2.65, 0]} {...props}>
                 <spotLight ref={stripLight} position={[width * 3, 0, width]} angle={0.19} penumbra={1} intensity={6} />
                 {/*<spotLight ref={fillLight} position={[0, -width / 2.4, -width * 2.2]} angle={0.2} penumbra={1} intensity={2} distance={width * 3} />*/}
-                <Mac onClick={toggleMac} className="cursor-pointer" ref={mbp16} texture={currentTexture} scale={width / 80} position={[(width / 10) + (scrollProgress * 6), 1, 0]} rotation={[0.1, macRotation, 0]} />
+                <Mac opacity={0} ref={mbp16} texture={currentTexture} scale={width / 80} position={[(width / 10) + (scrollProgress * 6), 1, 0]} rotation={[0.1, macRotation, 0]} />
             </group>
         </>
     )
@@ -97,7 +94,7 @@ const Mac = forwardRef(({ texture, ...props }: any, ref) => {
     const { nodes, materials } = useGLTF('/mbp-v1-pipe.glb')
 
     return (
-        <group {...props} dispose={null}>
+        <group {...props} dispose={null} >
             <group ref={ref} position={[0, -0.43, -11.35]} rotation={[Math.PI / 2, 0, 0]}>
                 <mesh geometry={nodes.back_1.geometry} material={materials.blackmatte} />
                 <mesh receiveShadow castShadow geometry={nodes.back_2.geometry} material={materials.aluminium} />
