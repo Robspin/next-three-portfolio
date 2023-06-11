@@ -14,6 +14,7 @@ import MusicBars from "@/components/music-bars"
 export default function ScrollDemo() {
     const [scrollProgress, setScrollProgress] = useState(0)
     const [focusedSection, setFocusedSection] = useState(0)
+    const [finishedIntroductionEntry, setFinishedIntroductionEntry] = useState(false)
     const mainContainer = useRef(null)
 
     useEffect(() => {
@@ -61,6 +62,7 @@ export default function ScrollDemo() {
                     onEnter: () => {
                         console.log('entered: ', i)
                         setFocusedSection(i)
+                        if (i === 1 && !finishedIntroductionEntry) setFinishedIntroductionEntry(true)
                         // gsap.to(mainContainer.current, {
                         //     backgroundColor: bgColors[i],
                         // })
@@ -102,7 +104,7 @@ export default function ScrollDemo() {
                         <Home scrollProgress={scrollProgress} />
                     </section>
                     <section className="sec2 pin dark:bg-gray-700">
-                        <Introduction focused={focusedSection === 1} />
+                        <Introduction finishedIntroductionEntry={finishedIntroductionEntry} />
                     </section>
                     <section className="sec2 pin">
                         <Technologies />

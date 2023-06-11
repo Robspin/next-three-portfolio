@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 
-const technologiesILove = ['typescript', 'react', 'deno', 'threejs', 'zod', 'prisma', 'docker', 'next']
+const technologiesILove = ['typescript', 'react', 'deno', 'threejs', 'zod', 'prisma', 'docker', 'next', 'figma', 'python']
 
 const ScrollingText = () => (
     <div>

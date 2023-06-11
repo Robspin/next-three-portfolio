@@ -1,16 +1,17 @@
+import { useContext } from "react"
 import Moon from "@/components/icons/moon"
 import Sun from "@/components/icons/sun"
-import { useDarkMode } from "@/hooks/useDarkMode"
+import { ThemeContext } from "@/utils/theme/theme-provider"
 
 const ThemeSwitch = () => {
-    const { darkMode, setDarkMode } = useDarkMode()
+    const { darkMode, toggleDarkMode } = useContext(ThemeContext)
 
     return <>
-            {darkMode ? <button onClick={() => setDarkMode(prev => !prev)} className="fill-red-500 h-[1.15rem] w-[1.15rem] hover:animate-spin-slow">
+            {darkMode ? <button onClick={toggleDarkMode} className="fill-red-500 h-[1.15rem] w-[1.15rem] hover:animate-spin-slow">
                         <Sun />
                     </button>
                     :
-                <button onClick={() => setDarkMode(prev => !prev)} className="fill-red-500 h-[1rem] w-[1rem] hover:animate-wiggle -mt-[2px]">
+                <button onClick={toggleDarkMode} className="fill-red-500 h-[1rem] w-[1rem] hover:animate-wiggle -mt-[2px]">
                     <Moon />
                 </button>
             }

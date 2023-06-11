@@ -26,7 +26,7 @@ export function Heart(props) {
                 <group name="BASE_HEART" position={[-0.68, 38.88, -0.26]} rotation={[-Math.PI / 2, 0, 0]}>
                   <group name="Object_5" position={[-0.09, 0, -38.88]}>
                     <mesh name="BASE_HEART_Material_#41_0" geometry={nodes['BASE_HEART_Material_#41_0'].geometry} >
-                      <meshPhysicalMaterial wireframe={true} color={'white'} />
+                      <meshPhysicalMaterial wireframe={true} color={'red'} />
                     </mesh>
                   </group>
                 </group>

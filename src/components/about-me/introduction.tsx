@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react"
+import { ReactNode, Suspense, useState } from "react"
 import Image from "next/image"
 import { TypeAnimation } from 'react-type-animation'
 
@@ -6,9 +6,6 @@ import Models from "@/components/canvas/models"
 
 const CURSOR_CLASS_NAME = 'custom-type-animation-cursor'
 
-type Props = {
-    focused: boolean
-}
 
 const ChatWrapper = ({ children, picture = false }: { children: ReactNode, picture?: boolean }) => (
     <div className={`p-3 bg-white border border-gray-600 rounded shadow-lg ${!picture && 'ml-[138px]'}`}>
@@ -18,13 +15,11 @@ const ChatWrapper = ({ children, picture = false }: { children: ReactNode, pictu
 
 
 
-export default function Introduction({ focused }: Props) {
+export default function Introduction({ finishedIntroductionEntry }: { finishedIntroductionEntry: boolean }) {
     const [storyPart, setStoryPart] = useState(0)
-    const [fakeLoader, setFakeLoader] = useState(true)
 
     const handleSmoothStoryProgression = () => {
         setStoryPart(3)
-        setTimeout(() => setFakeLoader(false), 1500)
         setTimeout(() => setStoryPart(prev => prev + 1), 3000)
     }
 
@@ -36,7 +31,7 @@ export default function Introduction({ focused }: Props) {
                         <Image src="/randomguy.jpg" alt="randomguy" height={120} width={120} />
                     </div>
                     <ChatWrapper picture>
-                        {focused &&
+                        {finishedIntroductionEntry &&
                             <TypeAnimation speed={50}  style={{ whiteSpace: 'pre-line', display: 'block' }} cursor={false}
                                className={CURSOR_CLASS_NAME}
                                 sequence={[
@@ -103,18 +98,18 @@ export default function Introduction({ focused }: Props) {
                     </div>
                 }
             </div>
-            <div className={`grid ${storyPart > 2 && 'grid-rows-2'} gap-4 w-full h-full overflow-hidden`}>
+            <div className={`grid ${storyPart > 1 && 'grid-rows-2'} gap-4 w-full h-full overflow-hidden px-4 pb-4`}>
 
-                {storyPart > 1 && <div className="rounded border border-slate-400 shadow w-full flex flex-col bg-slate-800 text-slate-100 overflow-hidden transition-all">
+                {storyPart > 1 && <div className="rounded border border-slate-400 w-full flex flex-col bg-slate-800 text-slate-100 overflow-hidden transition-all mb-4 shadow-lg">
                     <div className="w-full border-b border-slate-400">
-                        <div className="border-b-2 border-blue-500 px-3 py-2 inline-block">page.tsx</div>
+                        <div className="border-b-2 border-blue-500 px-3 py-2 inline-block">scene.tsx</div>
                     </div>
                     <div className="px-3 py-2 text-sm overflow-scroll flex flex-col-reverse">
                         <TypeAnimation speed={85} style={{ whiteSpace: 'pre', display: 'block' }} cursor={false}
                                        className={CURSOR_CLASS_NAME}
                                        sequence={[
                                            1000,
-                                           "import { useRef } from \"react\"\nimport { useFrame } from \"@react-three/fiber\"\nimport { Canvas, Icosahedron, Heart, ReactLogo } from \"@/components/scene\"\n\nconst ExampleScene = () => {\n\tconst groupRef = useRef()\n\tuseFrame(({ clock }) => groupRef.current.position.y += (0.005 * Math.sin(clock.getElapsedTime())))\n\nreturn (\n\t<Canvas>\n\t\t<group ref=\"groupRef\">\n\t\t\t<Icosahedron />\n\t\t\t<Heart />\n\t\t\t<ReactLogo />\n\t\t</group>\n\t</Canvas>\n\t)\n}",
+                                           "import { useRef } from \"react\"\nimport { useFrame } from \"@react-three/fiber\"\nimport { Canvas, Icosahedron, Heart, ReactLogo, Stars, Sky, Stars } from \"@/components/scene\"\n\nconst ExampleScene = () => {\n\tconst groupRef = useRef()\n\tuseFrame(({ clock }) => groupRef.current.position.y += (0.01 * Math.sin(clock.getElapsedTime())))\n\nreturn (\n\t<Canvas>\n\t\t{darkMode ? <Stars /> : <Sky />}\n\t\t<group ref=\"groupRef\">\n\t\t\t<Icosahedron />\n\t\t\t<Heart />\n\t\t\t<ReactLogo />\n\t\t</group>\n\t</Canvas>\n\t)\n}",
                                            1000,
                                            (el) => {
                                               el.classList.remove(CURSOR_CLASS_NAME)
@@ -124,8 +119,10 @@ export default function Introduction({ focused }: Props) {
                     </div>
                 </div>}
                 {storyPart > 2 &&
-                    <div className="h-full w-full rounded overflow-hidden">
-                        {fakeLoader ? 'Loading...' : <Models/>}
+                    <div className="h-full w-full rounded overflow-hidden rounded-lg border shadow-inner bg-black">
+                        <Suspense fallback={<div className="h-full w-full flex justify-center items-center">Loading...</div>}>
+                            <Models />
+                        </Suspense>
                     </div>
                 }
             </div>

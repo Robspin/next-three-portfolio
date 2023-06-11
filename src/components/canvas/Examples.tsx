@@ -1,6 +1,6 @@
 'use client'
 
-import {Icosahedron, useGLTF} from '@react-three/drei'
+import { Icosahedron, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useMemo, useRef, useState } from 'react'
@@ -68,11 +68,11 @@ export const WireReactLogo = (props) => {
 
     return (
         <group ref={mesh} {...props}>
-            <Line worldUnits points={points} color='#fff' wireframe={true} lineWidth={0.03} />
-            <Line worldUnits points={points} color='#fff' wireframe={true} lineWidth={0.03} rotation={[0, 0, 1]} />
-            <Line worldUnits points={points} color='#fff' wireframe={true} lineWidth={0.03} rotation={[0, 0, -1]} />
-            <Icosahedron args={[1, 1]} scale={[0.2, 0.2, 0.2]}>
-                <meshStandardMaterial wireframe attach="material" color="white" metallic={1} />
+            <Line worldUnits points={points} color='#62dafb' wireframe={true} lineWidth={0.12} />
+            <Line worldUnits points={points} color='#62dafb' wireframe={true} lineWidth={0.12} rotation={[0, 0, 1]} />
+            <Line worldUnits points={points} color='#62dafb' wireframe={true} lineWidth={0.12} rotation={[0, 0, -1]} />
+            <Icosahedron args={[1, 1]} scale={[0.4, 0.4, 0.4]}>
+                <meshStandardMaterial wireframe attach="material" color="#62dafb" metallic={1} />
             </Icosahedron>
         </group>
     )
