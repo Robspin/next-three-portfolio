@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic"
 import { useRef } from "react"
-import {Canvas, useFrame } from "@react-three/fiber"
+import { Canvas, useFrame } from "@react-three/fiber"
 import { Icosahedron, useProgress } from "@react-three/drei"
 
 // todo change with other low size models
@@ -36,13 +36,13 @@ const Models = () => {
 
     return (
             <group ref={groupRef}>
-                <Icosahedron ref={icosahedron} args={[2, 4]} scale={[0.2, 0.2, 0.2]} position={[-2, 0.35, 0]} >
+                <Icosahedron ref={icosahedron} args={[2, 4]} scale={[0.4, 0.4, 0.4]} position={[-4, 0.35, 0]} >
                     <meshStandardMaterial wireframe attach="material" color="white" metallic={1} />
                 </Icosahedron>
                 <group ref={heart}>
-                    <Heart scale={[0.01, 0.01, 0.01]} />
+                    <Heart scale={[0.02, 0.02, 0.02]} position={[0, -0.4, 0]} />
                 </group>
-                <WireReactLogo scale={[0.13, 0.13, 0.13]} position={[2, 0.35, 0]} />
+                <WireReactLogo scale={[0.30, 0.30, 0.30]} position={[4, 0.35, 0]} />
             </group>
     )
 }
