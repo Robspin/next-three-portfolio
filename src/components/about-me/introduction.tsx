@@ -73,7 +73,7 @@ export default function Introduction({ finishedIntroductionEntry }: { finishedIn
                                            sequence={[
                                                1000, "Cool huh.",
                                                2000, "Cool huh.\nReact and threejs together are really powerful!",
-                                               2000,
+                                               2000, "Cool huh.\nReact and threejs together are really powerful!\nTry clicking and dragging inside the scene.",
                                                (el) => {
                                                    setStoryPart(5)
                                                    el.classList.remove(CURSOR_CLASS_NAME)
@@ -88,17 +88,14 @@ export default function Introduction({ finishedIntroductionEntry }: { finishedIn
                             <TypeAnimation speed={50}  style={{ whiteSpace: 'pre-line', display: 'block' }} cursor={false}
                                            className={CURSOR_CLASS_NAME}
                                            sequence={[
-                                               1000, "Although I love frontend development...",
-                                               2000, "Although I love frontend development...\nWorking at a late-stage startup, I also had other tasks.",
-                                               1000, "Although I love frontend development...\nWorking at a late-stage startup, I also had other tasks.\nSuch as UX/UI Design, creating an React Native app\n and creating backend services.",
-                                               2000, "Although I love frontend development...\nWorking at a late-stage startup, I also had other tasks.\nSuch as UX/UI Design, creating an React Native app\n and creating backend services.\nKeep scrolling to find out more about technologies I love...",
+                                               1000, "Keep scrolling to find out more about me...",
                                                (el) => el.classList.remove(CURSOR_CLASS_NAME)
                                            ]}  />
                         </ChatWrapper>
                     </div>
                 }
             </div>
-            <div className={`grid ${storyPart > 1 && 'grid-rows-2'} gap-4 w-full h-full overflow-hidden px-4 pb-4`}>
+            <div className={`grid ${storyPart > 2 && 'grid-rows-2'} gap-4 w-full h-full overflow-hidden px-4 pb-4`}>
 
                 {storyPart > 1 && <div className="rounded border border-slate-400 w-full flex flex-col bg-slate-800 text-slate-100 overflow-hidden transition-all mb-4 shadow-lg">
                     <div className="w-full border-b border-slate-400">
@@ -109,7 +106,7 @@ export default function Introduction({ finishedIntroductionEntry }: { finishedIn
                                        className={CURSOR_CLASS_NAME}
                                        sequence={[
                                            1000,
-                                           "import { useRef } from \"react\"\nimport { useFrame } from \"@react-three/fiber\"\nimport { Canvas, Icosahedron, Heart, ReactLogo, Stars, Sky, Stars } from \"@/components/scene\"\n\nconst ExampleScene = () => {\n\tconst groupRef = useRef()\n\tuseFrame(({ clock }) => groupRef.current.position.y += (0.01 * Math.sin(clock.getElapsedTime())))\n\nreturn (\n\t<Canvas>\n\t\t{darkMode ? <Stars /> : <Sky />}\n\t\t<group ref=\"groupRef\">\n\t\t\t<Icosahedron />\n\t\t\t<Heart />\n\t\t\t<ReactLogo />\n\t\t</group>\n\t</Canvas>\n\t)\n}",
+                                           "import { useRef } from \"react\"\nimport { useFrame, useContext } from \"@react-three/fiber\"\nimport { Canvas, Icosahedron, Heart, ReactLogo, Sky, Stars } from \"@/components/scene\"\nimport { ThemeContext } from \"@/utils/theme/theme-context\"\n\nconst ExampleScene = () => {\n\tconst { darkMode } = useContext(ThemeContext)\n\tconst groupRef = useRef()\n\tuseFrame(({ clock }) => groupRef.current.position.y += (0.01 * Math.sin(clock.getElapsedTime())))\n\nreturn (\n\t<Canvas>\n\t\t{darkMode ? <Stars /> : <Sky />}\n\t\t<group ref={groupRef}>\n\t\t\t<Icosahedron />\n\t\t\t<Heart />\n\t\t\t<ReactLogo />\n\t\t</group>\n\t</Canvas>\n\t)\n}",
                                            1000,
                                            (el) => {
                                               el.classList.remove(CURSOR_CLASS_NAME)
