@@ -23,7 +23,7 @@ export default function Technologies() {
             {/*    </div>*/}
             {/*</div>*/}
             <div className="text-scroll-container">
-                <div className="scroll text4 bg-white">
+                <div className="scroll text4 bg-white border border-gray-600">
                     {ScrollingText()}
                     {ScrollingText()}
                     {ScrollingText()}

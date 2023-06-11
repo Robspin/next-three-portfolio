@@ -23,9 +23,9 @@ export default function index({ scrollProgress }: { scrollProgress: number }) {
                         <div className="mt-[1vw] text-[4vw] font-extrabold"><Titles /></div>
                     </div>
                 </div>
-                <div className="mt-auto">
-                    <p className="text-slate-500 italic">102 visits</p>
-                </div>
+                {/*<div className="mt-auto">*/}
+                {/*    <p className="text-slate-500 italic">102 visits</p>*/}
+                {/*</div>*/}
             </div>
         </div>
     )
